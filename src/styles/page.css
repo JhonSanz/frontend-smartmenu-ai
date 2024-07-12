@@ -1,0 +1,10 @@
+audio {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+body {
+    margin: 0;
+    background-image: url("../img/background.png");
+}
