@@ -11,11 +11,11 @@ import Grid from '@mui/material/Grid';
 import DynamicForm from '@/components/dynamicForm';
 import { ADMIN_ROLES } from "@/utils/constant";
 import { ThemeContext } from '@/components/providers';
+import fetchBackend from '@/utils/fetchBackend';
 
 
 export default function Login() {
   const { setAlertContent } = useContext(ThemeContext);
-  const [loginUser] = useMutation(LOGIN_MUTATION);
   const ref = useRef(null);
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(false);
@@ -30,7 +30,8 @@ export default function Login() {
   }, [])
 
   const handleSubmitForm = async (bodyValues) => {
-    // TODO: CODE LOGIN
+    console.log(bodyValues)
+    fetchBackend("/auth/token", "POST", bodyValues);
   }
 
   const triggerSubmit = () => {
@@ -85,31 +86,25 @@ export default function Login() {
     >
       <Grid container justifyContent="center" height="100vh" alignItems="center">
         <Grid item xs={8} display="flex" flexDirection="column" textAlign="center" justifyContent="center" alignItems="center">
-          {
-            currentCompany && (
-
-              <Box sx={{
-                width: {
-                  xs: '200px',
-                  sm: '300px',
-                  md: '400px',
-                  lg: '500px',
-                  xl: '600px',
-                }
-              }}>
-                <img
-                  src={currentCompany.images?.find(i => i.type === "logo")?.url || "https://blog.hubspot.com/hubfs/image8-2.jpg"}
-                  alt="Imagen"
-                  style={{
-                    width: "100%",
-                  }}
-                />
-              </Box>
-            )
-          }
+          <Box sx={{
+            width: {
+              xs: '200px',
+              sm: '300px',
+              md: '400px',
+              lg: '500px',
+              xl: '600px',
+            }
+          }}>
+            <img
+              src={"https://blog.hubspot.com/hubfs/image8-2.jpg"}
+              alt="Imagen"
+              style={{
+                width: "100%",
+              }}
+            />
+          </Box>
           <DynamicForm ref={ref} fields={loginFormFields} submitFunction={handleSubmitForm} triggerSubmit={triggerSubmit} />
           <Box>
-
             <Button
               sx={{ margin: 1 }}
               size="small"
@@ -120,21 +115,9 @@ export default function Login() {
             >
               Entrar
             </Button>
-            <Button sx={{ margin: 1 }}
-              size="small"
-              variant="outlined"
-              type='submit'
-              onClick={() => router.push(`/${company}/signup`)}
-            >
-              Registrarse
-            </Button>
-
           </Box>
         </Grid>
       </Grid>
-
-
-
     </Box>
   );
 }
