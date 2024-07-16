@@ -34,6 +34,12 @@ export default function Media() {
       width: 20,
     },
     {
+      headerName: "Name",
+      field: "name",
+      flex: 1,
+      minWidth: 100,
+    },
+    {
       headerName: "Url",
       field: "url",
       flex: 1,
@@ -44,18 +50,22 @@ export default function Media() {
   const mediaRequestRes = [
     {
       id: 1,
+      name: "menu 1",
       url: "http://something1.com"
     },
     {
       id: 2,
+      name: "menu 2",
       url: "http://something2.com"
     },
     {
       id: 3,
+      name: "menu 3",
       url: "http://something3.com"
     },
     {
       id: 4,
+      name: "menu 4",
       url: "http://something4.com"
     }
   ]
