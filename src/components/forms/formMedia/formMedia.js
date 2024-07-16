@@ -88,139 +88,78 @@ function CreateMediaForm({
 export default CreateMediaForm;
 
 
-// function UpdateMediaForm({
-//   setIsModalOpen,
-//   currentRow,
-//   updateInterface,
-// }) {
-//   const { setAlertContent } = useContext(ThemeContext);
-//   const apolloClient = useApolloClient();
-//   const [updateMedia] = useMutation(UPDATE_PAYMENT_MUTATION);
-//   const ref = useRef(null);
-//   const [fieldsForm, setFieldsForm] = useState([]);
-//   const [isSubmitting, setIsSubmitting] = useState(false);
+function UpdateMediaForm({
+  setIsModalOpen,
+  currentRow,
+  updateInterface,
+}) {
+  const { setAlertContent } = useContext(ThemeContext);
+  const ref = useRef(null);
+  const [fieldsForm, setFieldsForm] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-//   const triggerSubmit = () => {
-//     if (!ref || !ref.current) return;
-//     if (!ref.current.isValid()) return;
-//     ref.current.submit();
-//   }
+  const triggerSubmit = () => {
+    if (!ref || !ref.current) return;
+    if (!ref.current.isValid()) return;
+    ref.current.submit();
+  }
 
-//   const handleSubmitForm = async (bodyValues) => {
-//     const { data } = await updateMedia({
-//       variables: {
-//         ...bodyValues,
-//         id: parseInt(currentRow.id),
-//         planId: parseInt(bodyValues.planId.value),
-//         userId: parseInt(bodyValues.userId.value),
-//         amount: bodyValues.planId.price
-//       }
-//     });
-//     if (data.updateMedia.statusCode !== 200) {
-//       setAlertContent(data.updateMedia.message)
-//     }
-//     setIsModalOpen(false);
-//     updateInterface();
-//   }
+  const handleSubmitForm = async (bodyValues) => {
+    setIsDisabled(true);
+    console.log(bodyValues)
+    const res = null; // TODO: call backend
+    if (res !== 200) {
+    }
+    setIsModalOpen(false);
+    updateInterface();
+  }
 
-//   const [usersData, setUsersData] = useState({
-//     loading: false,
-//     error: false,
-//     data: []
-//   })
-//   async function getUsers(currentText) {
-//     summaryzedGetUser(apolloClient, setUsersData, currentText)
-//   }
+  useEffect(() => {
+    async function initialize() {
+      setFieldsForm(
+        [
+          {
+            "alias": "Nombre",
+            "name": "name",
+            "type": "string",
+            "default": currentRow.name,
+            "validators": Yup.string().required("required")
+          },
+          {
+            "name": "menu",
+            "type": "fileUpload",
+            "display": currentRow.url
+          }
+        ]
+      )
+    }
+    initialize();
+  }, []);
 
-//   const [plansData, setPlansData] = useState({
-//     loading: false,
-//     error: false,
-//     data: []
-//   })
-//   async function getPlans() {
-//     summaryzedGetPlan(apolloClient, setPlansData)
-//   }
+  return (
+    <div>
+      <h3>Actualizar pago</h3>
+      {
+        fieldsForm.length > 0 && <DynamicForm
+          ref={ref}
+          fields={fieldsForm}
+          submitFunction={handleSubmitForm}
+          setIsSubmitting={setIsSubmitting}
+        />
+      }
+      <br />
+      <Button
+        size="small"
+        variant="contained"
+        type='submit'
+        disabled={isSubmitting}
+        onClick={() => triggerSubmit()}
+      >Aceptar</Button>
+    </div>
+  )
+}
 
-//   const [bundlesData, setBundlesData] = useState({
-//     loading: false,
-//     error: false,
-//     data: []
-//   })
-//   async function getBundle() {
-//     summaryzedGetBundle(apolloClient, setBundlesData)
-//   }
-
-//   useEffect(() => {
-//     async function init() {
-//       await getPlans();
-//       await getBundle();
-//     }
-//     init();
-//   }, [])
-
-//   useEffect(() => {
-//     async function initialize() {
-//       setFieldsForm(
-//         [
-//           {
-//             "alias": "Usuario",
-//             "name": "userId",
-//             "type": "asyncChoices",
-//             "choices": usersData.data,
-//             "default": {
-//               name: `${currentRow.user.identification} ${currentRow.user.name} ${currentRow.user.email}`,
-//               value: parseInt(currentRow.user.id)
-//             },
-//             "optionsGetter": getUsers,
-//             "validators": Yup.object().required("required"),
-//           },
-//           {
-//             "alias": "Plan",
-//             "name": "planId",
-//             "type": "choices",
-//             "choices": plansData.data,
-//             "default": currentRow.plan ? { name: currentRow.plan.name, value: parseInt(currentRow.plan.id) } : { name: "", value: "" },
-//             "validators": Yup.object().required("required")
-//           },
-//           {
-//             "alias": "Paquete",
-//             "name": "bundleId",
-//             "type": "choices",
-//             "choices": bundlesData.data,
-//             "default": currentRow.bundle ? { name: currentRow.bundle.name, value: parseInt(currentRow.bundle.id) } : { name: "", value: "" },
-//             "validators": Yup.object().required("required")
-//           },
-//           {
-//             "alias": "Fecha",
-//             "name": "media_date",
-//             "type": "datetime",
-//             "default": formatDatetimePicker(currentRow.media_date),
-//             "validators": Yup.string().required("required")
-//           }
-//         ]
-//       )
-//     }
-//     initialize();
-//   }, [usersData.data, plansData.data, bundlesData.data]);
-
-//   return (
-//     <div>
-//       <h3>Actualizar pago</h3>
-//       {
-//         fieldsForm.length > 0 && <DynamicForm
-//           ref={ref}
-//           fields={fieldsForm}
-//           submitFunction={handleSubmitForm}
-//           setIsSubmitting={setIsSubmitting}
-//         />
-//       }
-//       <br />
-//       <Button size="small" variant="contained" type='submit' disabled={isSubmitting} onClick={() => triggerSubmit()}>Aceptar</Button>
-//     </div>
-//   )
-// }
-
-// export { UpdateMediaForm };
+export { UpdateMediaForm };
 
 
 // function DeleteMedia({

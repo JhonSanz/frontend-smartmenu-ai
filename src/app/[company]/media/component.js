@@ -9,7 +9,7 @@ import Table from "@/components/table";
 import fetchBackend from '@/utils/fetchBackend';
 import { ThemeContext } from '@/components/providers';
 import { PAGE_SIZE } from '@/utils/constant';
-import CreateMediaForm from '@/components/forms/formMedia/formMedia';
+import CreateMediaForm, { UpdateMediaForm } from '@/components/forms/formMedia/formMedia';
 import { containerButtonsStyles, buttonStyles } from '@/styles/buttonBoxStyles';
 import Modal from '@/components/modal';
 
@@ -84,13 +84,13 @@ export default function Media() {
           updateInterface={getMedia}
         />
         break;
-      // case "edit":
-      //   formOption = <UpdatePlanForm
-      //     setIsModalOpen={setIsModalOpen}
-      //     currentRow={row}
-      //     updateInterface={getPlans}
-      //   />
-      //   break;
+      case "edit":
+        formOption = <UpdateMediaForm
+          setIsModalOpen={setIsModalOpen}
+          currentRow={row}
+          updateInterface={getMedia}
+        />
+        break;
       // case "delete":
       //   formOption = <DeletePlan
       //     currentRow={row}
