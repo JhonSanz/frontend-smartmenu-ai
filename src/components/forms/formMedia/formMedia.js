@@ -21,12 +21,6 @@ function CreateMediaForm({
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [usersData, setUsersData] = useState({
-    loading: false,
-    error: false,
-    data: []
-  })
-
   useEffect(() => {
   }, [])
 
@@ -84,7 +78,7 @@ function CreateMediaForm({
         size="small"
         variant="contained"
         type='submit'
-        disabled={isSubmitting}
+        disabled={isSubmitting || isDisabled}
         onClick={() => triggerSubmit()}
       >Crear</Button>
     </div>

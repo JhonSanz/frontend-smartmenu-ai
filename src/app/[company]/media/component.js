@@ -2,21 +2,17 @@
 
 import { useRef, useEffect, useState, useContext } from 'react';
 import { useRouter, useParams } from "next/navigation";
-import { setCookie, deleteCookie } from 'cookies-next';
-import * as Yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import Table from "@/components/table";
 
-import DynamicForm from '@/components/dynamicForm';
-import { ADMIN_ROLES } from "@/utils/constant";
-import { ThemeContext } from '@/components/providers';
 import fetchBackend from '@/utils/fetchBackend';
+import { ThemeContext } from '@/components/providers';
 import { PAGE_SIZE } from '@/utils/constant';
 import CreateMediaForm from '@/components/forms/formMedia/formMedia';
 import { containerButtonsStyles, buttonStyles } from '@/styles/buttonBoxStyles';
 import Modal from '@/components/modal';
+
 
 export default function Media() {
   const { setAlertContent } = useContext(ThemeContext);
@@ -116,14 +112,14 @@ export default function Media() {
   }, [])
 
   return (
-    <Box>
+    <Box p={4}>
       <Box {...containerButtonsStyles} >
         <Button {...buttonStyles} size="small" variant="contained" onClick={() => performAction("create")}>Crear</Button>
         <Button {...buttonStyles} size="small" variant="outlined" onClick={() => performAction("filter")}>Filtrar</Button>
       </Box>
       <Table
         columns={columns}
-        rowOptions={null}
+        rowOptions={performAction}
         rows={mediaData.data || []}
         count={mediaData.count || 0}
         setPaginationModel={setPaginationModel}
