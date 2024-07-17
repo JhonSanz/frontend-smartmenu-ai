@@ -15,7 +15,7 @@ export default function Logout() {
     deleteCookie("role");
     deleteCookie("timezone");
     deleteCookie("userData");
-    router.push(`/${company}/login`);
+    router.push("/login");
   }, [])
 
   return <></>

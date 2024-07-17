@@ -1,5 +1,6 @@
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DescriptionIcon from '@mui/icons-material/Description';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 const clientRoutes = ["comprar", "dashboard", "pagos", "profile", "payment-callback"];
 const publicRoutes = ["login", "logout", "signup", "/"];
@@ -12,6 +13,7 @@ const allRoutes = [
 
 
 const menuOptions = [
+  { name: "Dashboard", route: "/dashboard", type: "admin", icon: <AssessmentIcon /> },
   { name: "Archivos", route: "/media", type: "admin", icon: <DescriptionIcon /> },
   { name: "Salir", route: "/logout", type: "admin", icon: <ExitToAppIcon /> },
 ]

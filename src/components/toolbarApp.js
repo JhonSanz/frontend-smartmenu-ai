@@ -62,7 +62,7 @@ export default function ToolbarApp() {
               disablePadding
               onClick={() => {
                 setDisplayMenu(false);
-                router.push(`/${company}/${item.route}`);
+                router.push(item.route === "/logout" ? item.route : `/${company}/${item.route}`);
                 setMenuOptionsName(item.name);
               }}
             >
