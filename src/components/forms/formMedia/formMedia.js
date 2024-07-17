@@ -162,39 +162,37 @@ function UpdateMediaForm({
 export { UpdateMediaForm };
 
 
-// function DeleteMedia({
-//   currentRow,
-//   setIsModalOpen,
-//   updateInterface
-// }) {
-//   const { setAlertContent } = useContext(ThemeContext);
-//   const [deleteMedia] = useMutation(DELETE_PAYMENT_MUTATION);
+function DeleteMedia({
+  currentRow,
+  setIsModalOpen,
+  updateInterface
+}) {
+  const { setAlertContent } = useContext(ThemeContext);
 
-//   async function handleDeleteMedia(planId) {
-//     const { data } = await deleteMedia({
-//       variables: { deleteMediaId: parseInt(planId) }
-//     });
-//     if (data.deleteMedia.statusCode !== 200) {
-//       setAlertContent(data.deleteMedia.message)
-//     }
-//     setIsModalOpen(false);
-//     updateInterface();
-//   }
+  async function handleDeleteMedia(planId) {
+    console.log(planId)
+    const res = null; // TODO: call backend
+    if (res !== 200) {
+      setAlertContent("pailander")
+    }
+    setIsModalOpen(false);
+    updateInterface();
+  }
 
-//   return (
-//     <Confirmation
-//       title="Eliminar pago"
-//       description="¿Está seguro de que desea eliminar este pago?"
-//       onConfirm={() => {
-//         handleDeleteMedia(currentRow.id);
-//         setIsModalOpen(false);
-//       }}
-//       onCancel={() => setIsModalOpen(false)}
-//     />
-//   )
-// }
+  return (
+    <Confirmation
+      title="Eliminar archivo"
+      description="¿Está seguro de que desea eliminar este archivo?"
+      onConfirm={() => {
+        handleDeleteMedia(currentRow.id);
+        setIsModalOpen(false);
+      }}
+      onCancel={() => setIsModalOpen(false)}
+    />
+  )
+}
 
-// export { DeleteMedia };
+export { DeleteMedia };
 
 
 // function FilterMediaForm({

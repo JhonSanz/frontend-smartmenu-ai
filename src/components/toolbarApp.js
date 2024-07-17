@@ -40,16 +40,8 @@ export default function ToolbarApp() {
   };
 
   useEffect(() => {
-    const role = getCookie("role");
-    if (role) {
-      if (!role) router.push(`/${company}/login`);
-      if (ADMIN_ROLES.includes(role)) {
-        setOptionsMenu(menuOptions);
-      } else {
-        setOptionsMenu(menuUserOptions);
-      }
-    }
-  }, [getCookie("role")]);
+    setOptionsMenu(menuOptions);
+  }, []);
 
   useEffect(() => {
     optionsMenu.length > 0 &&

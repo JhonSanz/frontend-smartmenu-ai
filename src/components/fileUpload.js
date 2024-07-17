@@ -45,7 +45,8 @@ const InputFileUpload = forwardRef(function InputFileUpload({ fieldName, display
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      if (file.type.startsWith('image/')) {
+      if (file.type === 'application/pdf') {
+      // if (file.type.startsWith('image/')) {
         if (file.size <= 5 * 1024 * 1024) {
           setErrorFileType(null);
           setImageFile(file);
@@ -126,7 +127,7 @@ const InputFileUpload = forwardRef(function InputFileUpload({ fieldName, display
             <VisuallyHiddenInput
               type="file"
               onChange={handleFileChange}
-              accept="image/*"
+              accept=".pdf"
             />
           </Button>
           <br />

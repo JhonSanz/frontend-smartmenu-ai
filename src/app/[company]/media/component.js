@@ -9,7 +9,7 @@ import Table from "@/components/table";
 import fetchBackend from '@/utils/fetchBackend';
 import { ThemeContext } from '@/components/providers';
 import { PAGE_SIZE } from '@/utils/constant';
-import CreateMediaForm, { UpdateMediaForm } from '@/components/forms/formMedia/formMedia';
+import CreateMediaForm, { UpdateMediaForm, DeleteMedia } from '@/components/forms/formMedia/formMedia';
 import { containerButtonsStyles, buttonStyles } from '@/styles/buttonBoxStyles';
 import Modal from '@/components/modal';
 
@@ -51,22 +51,22 @@ export default function Media() {
     {
       id: 1,
       name: "menu 1",
-      url: "http://something1.com"
+      url: "http://accioneduca.org/admin/archivos/modulos/ayudanos/prueba.pdf"
     },
     {
       id: 2,
       name: "menu 2",
-      url: "http://something2.com"
+      url: "https://img.freepik.com/vector-gratis/tarjeta-felicitacion-dia-mundial-sonrisa-texto-o-vector-espacio-vacio_1017-46370.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1719273600&semt=ais_user"
     },
     {
       id: 3,
       name: "menu 3",
-      url: "http://something3.com"
+      url: "https://img.freepik.com/vector-gratis/tarjeta-felicitacion-dia-mundial-sonrisa-texto-o-vector-espacio-vacio_1017-46370.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1719273600&semt=ais_user"
     },
     {
       id: 4,
       name: "menu 4",
-      url: "http://something4.com"
+      url: "https://img.freepik.com/vector-gratis/tarjeta-felicitacion-dia-mundial-sonrisa-texto-o-vector-espacio-vacio_1017-46370.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1719273600&semt=ais_user"
     }
   ]
 
@@ -91,13 +91,13 @@ export default function Media() {
           updateInterface={getMedia}
         />
         break;
-      // case "delete":
-      //   formOption = <DeletePlan
-      //     currentRow={row}
-      //     setIsModalOpen={setIsModalOpen}
-      //     updateInterface={getPlans}
-      //   />
-      //   break;
+      case "delete":
+        formOption = <DeleteMedia
+          currentRow={row}
+          setIsModalOpen={setIsModalOpen}
+          updateInterface={getMedia}
+        />
+        break;
       // case "filter":
       //   formOption = <FilterPlanForm
       //     filters={filters.filter}
@@ -115,6 +115,7 @@ export default function Media() {
 
   async function getMedia() {
     setLoading(true);
+    console.log("llamando al backend")
     setLoading(false);
   }
 
